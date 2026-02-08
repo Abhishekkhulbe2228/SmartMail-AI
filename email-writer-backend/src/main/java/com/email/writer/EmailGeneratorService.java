@@ -1,6 +1,5 @@
 package com.email.writer;
 
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,10 +23,9 @@ public class EmailGeneratorService {
     }
 
     public String generateEmailReply(EmailRequest emailRequest) {
-        //build prompt
+
         String prompt = buildPrompt(emailRequest);
 
-        //Prepare raw JSON Body
         String requestBody = String.format("""
                 {
                     "contents": [
@@ -39,9 +37,8 @@ public class EmailGeneratorService {
                         ]
                       }
                     ]
-                  }""", prompt);
+                  }""", prompt.replace("\"", "\\\""));
 
-        //Send Request
         String response = webClient.post()
                 .uri(uriBuilder -> uriBuilder
                         .path("/v1beta/models/gemini-3-flash-preview:generateContent")
@@ -52,7 +49,7 @@ public class EmailGeneratorService {
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
-        //Extract response
+
         return extractResponseContent(response);
     }
 
@@ -73,12 +70,30 @@ public class EmailGeneratorService {
     }
 
     private String buildPrompt(EmailRequest emailRequest) {
-        StringBuilder prompt = new StringBuilder();
-        prompt.append("Generate a professional email reply for the following email:");
-        if (emailRequest.getTone() != null && !emailRequest.getTone().isEmpty()) {
-            prompt.append("Use a ").append(emailRequest.getTone()).append("tone");
-        }
-        prompt.append("Original Email: \n").append(emailRequest.getEmailContent());
-        return prompt.toString();
+
+        String tone = (emailRequest.getTone() == null || emailRequest.getTone().isEmpty())
+                ? "professional"
+                : emailRequest.getTone();
+
+        return """
+You are an intelligent email assistant.
+
+Write a %s, natural-sounding email reply to the message below.
+
+RULES:
+- Do NOT include any subject line.
+- Do NOT write "Subject:".
+- Only return the email body.
+- Keep the reply concise but complete.
+- Sound polite, human, and confident.
+- If the email asks a question, answer it.
+- If it requests something, acknowledge and respond appropriately.
+- Do not repeat the original email.
+- Do not add meta phrases like "Here is your reply".
+- End with an appropriate sign-off.
+
+Email:
+%s
+""".formatted(tone, emailRequest.getEmailContent());
     }
 }
