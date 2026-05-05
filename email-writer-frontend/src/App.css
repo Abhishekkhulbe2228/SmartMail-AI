@@ -1,0 +1,405 @@
+── Reset & Root ───────────────────────────────────
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Animations ───────────────────────────────────── */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.3; }
+  50%       { transform: translateY(-8px); opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── App Root ─────────────────────────────────────── */
+.app-root {
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  background: #0C1018;
+  color: #DDE1F0;
+  min-height: 100vh;
+}
+
+/* ── Header ───────────────────────────────────────── */
+.app-header {
+  background: #0C1018;
+  border-bottom: 1px solid #1B2035;
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo-text {
+  font-family: 'Syne', 'Georgia', serif;
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: -0.4px;
+  color: #ffffff;
+}
+
+.logo-accent {
+  color: #D9971A;
+}
+
+.logo-badge {
+  background: #D9971A;
+  color: #0C0800;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+/* ── Main Content ─────────────────────────────────── */
+.app-main {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 40px 28px 64px;
+}
+
+/* ── Hero ─────────────────────────────────────────── */
+.hero {
+  margin-bottom: 36px;
+  animation: fadeIn 0.5s ease both;
+}
+
+.hero-title {
+  font-family: 'Syne', 'Georgia', serif;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  line-height: 1.2;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.hero-accent {
+  color: #D9971A;
+}
+
+.hero-sub {
+  font-size: 13px;
+  color: #5A6480;
+  line-height: 1.6;
+}
+
+/* ── Panel Grid ───────────────────────────────────── */
+.panel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 680px) {
+  .panel-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-title {
+    font-size: 24px;
+  }
+}
+
+/* ── Card ─────────────────────────────────────────── */
+.card {
+  background: #131828;
+  border: 1px solid #1B2035;
+  border-radius: 14px;
+  padding: 24px;
+  animation: fadeIn 0.5s ease 0.1s both;
+}
+
+/* ── Card Label ───────────────────────────────────── */
+.card-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #5A6480;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.label-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #D9971A;
+  flex-shrink: 0;
+}
+
+/* ── Input Textarea ───────────────────────────────── */
+.input-area {
+  width: 100%;
+  background: #0C1018;
+  border: 1px solid #1B2035;
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 13px;
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  color: #DDE1F0;
+  resize: vertical;
+  outline: none;
+  line-height: 1.75;
+  transition: border-color 0.2s ease;
+  min-height: 200px;
+}
+
+.input-area::placeholder {
+  color: #2E3555;
+}
+
+.input-area:focus {
+  border-color: #D9971A;
+}
+
+/* ── Char Count ───────────────────────────────────── */
+.char-count {
+  font-size: 11px;
+  color: #2E3555;
+  text-align: right;
+  margin-top: 5px;
+  transition: color 0.2s;
+}
+
+.char-count.active {
+  color: #5A6480;
+}
+
+/* ── Tone Section ─────────────────────────────────── */
+.tone-section {
+  margin-top: 20px;
+}
+
+.tone-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+}
+
+.tone-btn {
+  padding: 8px 4px;
+  border-radius: 8px;
+  border: 1px solid #1B2035;
+  background: #0C1018;
+  color: #5A6480;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s ease;
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+}
+
+.tone-btn:hover {
+  border-color: #2E3555;
+  color: #8B95B0;
+}
+
+.tone-btn.active {
+  border-color: #D9971A;
+  background: #1A1500;
+  color: #D9971A;
+}
+
+/* ── Generate Button ──────────────────────────────── */
+.gen-btn {
+  margin-top: 18px;
+  width: 100%;
+  padding: 13px;
+  background: #D9971A;
+  color: #0C0800;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  letter-spacing: 0.2px;
+}
+
+.gen-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.gen-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.gen-btn:disabled {
+  background: #1B2035;
+  color: #2E3555;
+  cursor: not-allowed;
+}
+
+/* ── Spinner ──────────────────────────────────────── */
+.spinner {
+  width: 13px;
+  height: 13px;
+  border: 2px solid #2E2000;
+  border-top-color: #D9971A;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+/* ── Error Box ────────────────────────────────────── */
+.error-box {
+  margin-top: 12px;
+  background: #1A0808;
+  border: 1px solid #4A1515;
+  border-radius: 8px;
+  padding: 11px 14px;
+  font-size: 12px;
+  color: #FF7070;
+  animation: fadeIn 0.3s ease both;
+  line-height: 1.5;
+}
+
+/* ── Output Box ───────────────────────────────────── */
+.output-box {
+  min-height: 240px;
+  background: #0C1018;
+  border: 1px solid #1B2035;
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 13px;
+  line-height: 1.75;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* ── Empty State ──────────────────────────────────── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 210px;
+  gap: 10px;
+  color: #2E3555;
+}
+
+.empty-text {
+  font-size: 12px;
+  color: #2E3555;
+}
+
+/* ── Loading Dots ─────────────────────────────────── */
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 210px;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #D9971A;
+  animation: bounce 1.2s ease-in-out infinite;
+}
+
+/* ── Reply Text ───────────────────────────────────── */
+.reply-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  color: #DDE1F0;
+  line-height: 1.75;
+  animation: fadeIn 0.4s ease both;
+}
+
+/* ── Output Footer ────────────────────────────────── */
+.output-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.reply-chars {
+  font-size: 11px;
+  color: #2E3555;
+}
+
+/* ── Copy Button ──────────────────────────────────── */
+.copy-btn {
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1px solid #1B2035;
+  background: transparent;
+  color: #5A6480;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+}
+
+.copy-btn:hover {
+  border-color: #2E3555;
+  color: #8B95B0;
+}
+
+.copy-btn.copied {
+  border-color: #1A6B3A;
+  background: #091A10;
+  color: #3CBA72;
+}
+
+/* ── Clear Button ─────────────────────────────────── */
+.clear-btn {
+  background: none;
+  border: none;
+  color: #2E3555;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: color 0.2s;
+}
+
+.clear-btn:hover {
+  color: #5A6480;
+}
+
+/* ── Powered By ───────────────────────────────────── */
+.powered-by {
+  margin-top: 28px;
+  text-align: center;
+  font-size: 11px;
+  color: #2E3555;
+}
+
+.powered-by span {
+  color: #D9971A;
+}
